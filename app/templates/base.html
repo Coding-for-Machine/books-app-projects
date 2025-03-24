@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
+    
+    <!-- Swiper -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="{% static "css/style_d.css" %}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg" href="{% static 'img/bookfavicon.svg' %}" />
+    
+    <title>{% block title %}E-Bookpolis | Thoriq AS{% endblock %}</title>
+    <script defer src="{% static "js/script_d.js" %}"></script>
+  </head>
+  <body>
+    <header class="header">
+      <!-- 1-sarlavha qismi boshlanishi -->
+      <div class="header-1">
+        <a href="#" class="logo"><i class="fas fa-book"></i> Bookpolis</a>
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="Qidirish..."
+            id="search-box"
+          />
+          <label for="search-box" type="submit" class="fas fa-search"></label>
+        </form>
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart-circle-check"></a>
+          <a href="#" class="fas fa-shopping-cart"></a>
+          <a id="login-btn" class="fa-solid fa-user" href="./login.html"></a>
+        </div>
+      </div>
+      <!-- 1-sarlavha qismi tugashi -->
+
+      <!-- 2-sarlavha qismi boshlanishi -->
+      {% if request.path == '/' %}
+  <div class="header-2">
+    <div class="navbar">
+      <a class="active" href="#home">Bosh sahifa</a>
+      <a href="#about">Biz haqimizda</a>
+      <a href="#populer">Ommabop</a>
+      <a href="#member">A'zolar</a>
+      <a href="#new">Yangilar</a>
+      <a href="#reviews">Sharhlar</a>
+      <a href="#blogs">Bloglar</a>
+    </div>
+  </div>
+{% endif %}
+      <!-- 2-sarlavha qismi tugashi -->
+    </header>
+    {% block content %}
+    {% endblock %}
+    
+<!-- Footer Start -->
+<footer class="footer" id="footer">
+  <div class="main-content">
+    <div class="left box">
+      <h2>Biz haqimizda</h2>
+      <div class="content">
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores,
+          corporis nostrum? Quam fugiat provident veniam totam rerum eaque
+          culpa molestiae ullam eveniet natus incidunt, beatae deleniti
+          blanditiis, tempore commodi dolores, tempore commodi dolores.
+        </p>
+        <br />
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
+          reprehenderit ipsam quas, quasi odio totam vel fuga! Illo sunt
+          harum porro excepturi quis culpa atque, soluta est modi omnis
+          repellendus.
+        </p>
+        <div class="social">
+          <a href="#footer"><span class="fab fa-facebook-f"></span></a>
+          <a href="#footer"><span class="fab fa-twitter"></span></a>
+          <a href="#footer"><span class="fab fa-instagram"></span></a>
+          <a href="#footer"><span class="fa-brands fa-youtube"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="center box">
+      <h2>Manzil</h2>
+      <div class="content">
+        <div class="place">
+          <span class="fas fa-map-marker-alt"></span>
+          <span class="text">Indoneziya, Yer sayyorasi</span>
+        </div>
+        <div class="phone">
+          <span class="fas fa-phone-alt"></span>
+          <span class="text">+6282-1234-5679</span>
+        </div>
+        <div class="email">
+          <span class="fas fa-envelope"></span>
+          <span class="text">BookpolisTes@gmail.com</span>
+        </div>
+      </div>
+    </div>
+    <div class="right box">
+      <h2>Biz bilan bog‘laning</h2>
+      <div class="content">
+        <form action="">
+          <div class="email">
+            <div class="text">Email</div>
+            <input type="email" placeholder="Email manzilingiz..." required />
+          </div>
+          <div class="msg">
+            <div class="text">Xabar</div>
+            <input type="text" placeholder="Xabaringiz..." required /></input>
+          </div>
+          <div class="btn">
+            <button type="submit">Yuborish</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+      <span class="credit"
+        >Mualliflik huquqi <span class="far fa-copyright"></span
+          > 2022
+      </span>
+      <span> <a href="https://github.com/Muhthoriqas">Thoriq AS</a> | Barcha huquqlar himoyalangan.</span>
+  </div>
+</footer>
+<!-- Footer End  -->
+
+
+    <!-- Loader Start-->
+    {% if request.path == '/' %}
+    
+    <div class="loader-container">
+      <!-- Gif Source Link: https://tenor.com/view/gb-notebook-laptop-gif-17733403 -->
+      <img src="{% static './img/mainLoader.gif' %}" alt="">
+    </div>
+    {% endif %}
+    <!-- Loader End -->
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    {% load static %}
+    <script src="{% static 'js/script.js' %}"></script>
+
+  </body>
+</html>

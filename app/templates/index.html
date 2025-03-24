@@ -1,0 +1,518 @@
+{% extends 'base.html' %}
+
+{% block title %}Bosh sahifa | E-Bookpolis{% endblock %}
+{% load static %}
+{% block content %}
+    <!-- Pastki navigatsiya boshlanishi -->
+    <div class="bottom-navbar">
+      <a href="#home" class="fas fa-home"></a>
+      <a href="#about" class="fas fa-people-group"></a>
+      <a href="#populer" class="fas fa-fire"></a>
+      <a href="#member" class="fas fa-user-plus"></a>
+      <a href="#new" class="fas fa-book-bookmark"></a>
+      <a href="#reviews" class="fas fa-star"></a>
+      <a href="#blogs" class="fas fa-newspaper"></a>
+    </div>
+    <!-- Pastki navigatsiya tugashi -->
+
+    <!-- Bosh sahifa bo'limi boshlanishi -->
+    <section class="home" id="home">
+      <div class="row">
+        <div class="content">
+          <h3>Kitoblar ruhingizni oziqlantiradi</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cum ipsam
+            et maxime libero inventore placeat illo, illum deserunt rem aperiam
+            fuga repudiandae distinctio quo odio sit perspiciatis vero
+            laudantium minima.
+          </p>
+          <a href="#populer" class="btn">Hozir xarid qiling!</a>
+        </div>
+
+        <div class="swiper books-slider">
+          <div class="swiper-wrapper">
+            {% for book in books_popular %}
+              <a href="#" class="swiper-slide" style="padding: 10px; margin: 10px; display: inline-block;">
+                <img src="{{ book.image.url }}" alt="" style="width: 100%; height: auto; border-radius: 5px;" />
+              </a>
+            {% endfor %}
+          </div>
+          <img src="{% static 'img/stand.png' %}" class="stand" alt="Stend tasviri">
+        </div>
+      </div>
+    </section>
+    <!-- Bosh sahifa bo'limi tugashi -->
+
+
+    <!-- About Us Start -->
+    <section id="about" class="about">
+      <div class="container">
+        <h1>NEGA BIZNI TANLASHINGIZ KERAK?</h1>
+        <div class="row">
+          <div class="image">
+            <img src="{% static './img/img4.svg' %}" alt="" />
+          </div>
+    
+          <div class="content">
+            <h3>dunyodagi eng yaxshi kitob do'koni</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur ipsum adipisicing elit.
+              Dolore, sequi corrupti corporis quaerat voluptatem ipsam neque
+              labore modi autem, saepe numquam quod reprehenderit rem? Tempora
+              aut soluta odio corporis nihil!
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur ipsum adipisicing elit.
+              Aperiam, nemo. Sit porro illo eos cumque deleniti iste alias, eum
+              natus.
+            </p>
+            <div class="icons-container">
+              <div class="icons">
+                <i class="fas fa-shield"></i>
+                <span>xavfsiz yetkazib berish</span>
+              </div>
+              <div class="icons">
+                <i class="fas fa-wallet"></i>
+                <span>oson to'lov</span>
+              </div>
+              <div class="icons">
+                <i class="fas fa-headset"></i>
+                <span>24/7 xizmat</span>
+              </div>
+            </div>
+            <a href="./404Error.html" class="btn">batafsil</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- About Us End -->
+
+    <!-- Popular Book Start -->
+    <section class="populer" id="populer">
+      <h1 class="heading"><span> Popular Books </span></h1>
+      <div class="swiper populer-slider">
+        <div class="swiper-wrapper">
+          {% for book in books_popular %}
+          <div class="swiper-slide box">
+            <div class="icons">
+              <a href="#populer" class="fas fa-search"></a>
+              <a href="#populer" class="fas fa-heart-circle-plus"></a>
+              <a href="{% url 'book_detail' book.id %}" class="fas fa-info"></a>
+            </div>
+            <div class="image">
+              <img src="{{ book.image.url }}" alt="{{ book.title }}" />
+            </div>
+            <div class="content">
+              <h3>{{book_p.title}}</h3>
+              <div class="price">Likes Count {{ book.likes_count }}<span>Downloads: {{ book.downloads_count }}</span></div>
+              <a href="{% url 'book_detail' book.id %}" class="btn">Views</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </section>
+    <!-- Popular Book End -->
+
+    <!-- Member Start -->
+    <section id="member" class="member">
+      <div class="container">
+        <h1>BECOME A MEMBER!</h1>
+        <div class="row">
+          <div class="content">
+            <h3>
+              Join Our <span>Member</span> And<br />
+              Get Notify For <span>New Updates!</span>
+            </h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur ipsum adipisicing elit.
+              Dolore, sequi corrupti corporis quaerat voluptatem ipsam neque
+              labore modi autem, saepe numquam quod reprehenderit rem? Tempora
+              aut soluta odio corporis nihil!
+            </p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur ipsum adipisicing elit.
+              consectetur ipsum vero hic adipisci incidunt iste nulla. Lorem
+              ipsum dolor, sit amet consectetur ipsum adipisicing elit.
+              consectetur ipsum verohic.
+            </p>
+            <form action="">
+              <input
+                type="email"
+                name=""
+                placeholder="Enter your email..."
+                id=""
+                class="box"
+                required
+              />
+              <input type="submit" value="get notify" class="btn" />
+              <a href="./member.html" class="btn">Join Member</a>
+            </form>
+          </div>
+          <div class="image">
+            <img src="./img/img5.svg" alt="" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Member End -->
+
+    <!-- New Book Start -->
+    <section class="new" id="new">
+      <h1 class="heading"><span>New Books</span></h1>
+
+      <!-- New Books  Section 1 Starts-->
+      <div class="swiper new-slider">
+        <div class="swiper-wrapper">
+          <a href="#new" class="swiper-slide box">
+            <div class="image">
+              <img src="./img/book-1.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>New Books</h3>
+              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="#new" class="swiper-slide box">
+            <div class="image">
+              <img src="./img/book-2.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>New Books</h3>
+              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="#new" class="swiper-slide box">
+            <div class="image">
+              <img src="./img/book-3.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>New Books</h3>
+              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="#new" class="swiper-slide box">
+            <div class="image">
+              <img src="./img/book-4.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>New Books</h3>
+              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="#new" class="swiper-slide box">
+            <div class="image">
+              <img src="./img/book-5.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>New Books</h3>
+              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- New Books Section 1 End -->
+
+      <!-- New Books Section 2 Start  -->
+      <div class="swiper new-slider-2">
+        <div class="swiper-wrapper">
+          <a href="#new" class="swiper-slide box">
+            <div class="image">
+              <img src="./img/book-6.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>New Books</h3>
+              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="#new" class="swiper-slide box">
+            <div class="image">
+              <img src="./img/book-7.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>New Books</h3>
+              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="#new" class="swiper-slide box">
+            <div class="image">
+              <img src="./img/book-8.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>New Books</h3>
+              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="#new" class="swiper-slide box">
+            <div class="image">
+              <img src="./img/book-9.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>New Books</h3>
+              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="#new" class="swiper-slide box">
+            <div class="image">
+              <img src="./img/book-10.png" alt="" />
+            </div>
+            <div class="content">
+              <h3>New Books</h3>
+              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- New Books Section 2 End-->
+    </section>
+    <!-- New Book End -->
+
+    <!-- Review Start -->
+    <section class="reviews" id="reviews">
+      <h1>client's reviews</h1>
+      <div class="swiper reviews-slider">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide box">
+            <i class="fas fa-quote-left quote"></i>
+            <p>
+              Lorem aliasry ipsum dolor sits ametans, consectetur ipsum ipsum
+              adipisicing elitits. Expedita reiciendis itaque placeat thuratu,
+              quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae,
+              alias.
+            </p>
+            <div class="content">
+              <div class="info">
+                <div class="name">Thoriq Ali</div>
+                <div class="job">Web Dev</div>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+              <div class="image">
+                <img src="./img/avatar4.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide box">
+            <i class="fas fa-quote-left quote"></i>
+            <p>
+              Lorem aliasry ipsum dolor sits ametans, consectetur ipsum
+              adipisicing elitits. Expedita reiciendis itaque placeat thuratu,
+              quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae,
+              alias.
+            </p>
+            <div class="content">
+              <div class="info">
+                <div class="name">Windah Basu</div>
+                <div class="job">YouTuber</div>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <div class="image">
+                <img src="./img/avatar2.svg" alt="" />
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide box">
+            <i class="fas fa-quote-left quote"></i>
+            <p>
+              Lorem aliasry ipsum dolor sits ametans, consectetur ipsum
+              adipisicing elitits. Expedita reiciendis itaque placeat thuratu,
+              quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae,
+              alias.
+            </p>
+            <div class="content">
+              <div class="info">
+                <div class="name">Umar S</div>
+                <div class="job">Programmer</div>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <div class="image">
+                <img src="./img/avatar5.svg" alt="" />
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide box">
+            <i class="fas fa-quote-left quote"></i>
+            <p>
+              Lorem aliasry ipsum dolor sits ametans, consectetur ipsum
+              adipisicing elitits. Expedita reiciendis itaque placeat thuratu,
+              quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae,
+              alias.
+            </p>
+            <div class="content">
+              <div class="info">
+                <div class="name">Budi Bellis</div>
+                <div class="job">Freelancer</div>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <div class="image">
+                <img src="./img/avatar3.svg" alt="" />
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide box">
+            <i class="fas fa-quote-left quote"></i>
+            <p>
+              Lorem aliasry ipsum dolor sits ametans, consectetur ipsum
+              adipisicing elitits. Expedita reiciendis itaque placeat thuratu,
+              quasi yiuos repellendus repudiandae deleniti ideas fuga molestiae,
+              alias.
+            </p>
+            <div class="content">
+              <div class="info">
+                <div class="name">Kristina Bellis</div>
+                <div class="job">Doctor</div>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <div class="image">
+                <img src="./img/avatar6.svg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Review End -->
+
+    <!-- Blogs Start -->
+    <section class="blogs" id="blogs">
+      <div class="container">
+        <h1 class="heading"><span>Bizning kundalik Kitoblarimiz</span></h1>
+
+        <div class="box-container">
+          {% for book in books %}
+          <div class="box">
+            <div class="image">
+              <img src="{{book.image.url}}" alt="{{book.title}}" />
+            </div>
+            <div class="content">
+              <h3>{{book.title}}</h3>
+              <p>
+                {{ book.body|safe }}
+              </p>
+              <a href="{% url 'book_detail' book.id %}" class="btn">read more</a>
+              <div class="icons">
+                <span> <i class="fas fa-calendar"></i> {{book.created_at}} </span>
+                <span> <i class="fas fa-user"></i> {{book.author}}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div id="load-more">load more</div>
+      </div>
+    </section>
+    <!-- Blogs End -->
+
+{% endblock content %}

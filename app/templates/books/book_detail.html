@@ -1,0 +1,36 @@
+<h1>{{ book.title }}</h1>
+<img src="{{ book.image.url }}" alt="{{ book.title }}">
+<p>{{ book.body|safe }}</p>
+
+<p><strong>Likes:</strong> <span id="like-count">{{ book.likes_count }}</span></p>
+<button id="like-button" onclick="toggleLike({{ book.id }})">
+    {% if is_liked %}❤️ Unlike{% else %}🤍 Like{% endif %}
+</button>
+
+<br>
+<a href="{% url 'download_book' book.id %}" download>📥 Yuklab olish</a>
+
+{% csrf_token %}
+<script>
+    function getCSRFToken() {
+        return document.querySelector('[name=csrfmiddlewaretoken]').value;
+    }
+
+    function toggleLike(bookId) {
+        fetch(`/${bookId}/like/`, {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCSRFToken(),
+                "Content-Type": "application/json",
+            },
+            credentials: "same-origin",
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("like-count").innerText = data.likes_count;
+            document.getElementById("like-button").innerText = data.liked ? "❤️ Unlike" : "🤍 Like";
+        })
+        .catch(error => console.error("Xatolik:", error));
+    }
+</script>
+

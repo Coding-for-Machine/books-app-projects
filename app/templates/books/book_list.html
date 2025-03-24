@@ -1,0 +1,6 @@
+{% for book in books %}
+    <div>
+        <h2><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></h2>
+        <p>Likes: {{ book.likes_count }} | Downloads: {{ book.downloads_count }}</p>
+    </div>
+{% endfor %}
