@@ -3,7 +3,7 @@ from .models import Book, Like, Download
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ("title", "author", "likes_count", "downloads_count", "created_at")
+    list_display = ("title", "author", "likes_count", "downloads_count", "daraja", "created_at")
     search_fields = ("title", "author")
 
 @admin.register(Like)

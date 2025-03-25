@@ -167,90 +167,31 @@
       <!-- New Books  Section 1 Starts-->
       <div class="swiper new-slider">
         <div class="swiper-wrapper">
-          <a href="#new" class="swiper-slide box">
-            <div class="image">
-              <img src="./img/book-1.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>New Books</h3>
-              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
+          {% for book in nev_books %}
+            {% if book.id|divisibleby:2 %}
+            <a href="{% url 'book_detail' book.id %}" class="swiper-slide box">
+              <div class="image">
+                {% if book.image %}
+                  <img src="{{ book.image.url }}" alt="Book Image" />
+                {% else %}
+                  <img src="path_to_default_image.jpg" alt="Default Image" />
+                {% endif %}
               </div>
-            </div>
-          </a>
+              <div class="content">
+                <h3>New Books</h3>
+                <div class="price">{{ book.likes_count|default:"0" }}</div>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </a>
+            {% endif %}
+          {% endfor %}
 
-          <a href="#new" class="swiper-slide box">
-            <div class="image">
-              <img src="./img/book-2.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>New Books</h3>
-              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-            </div>
-          </a>
-
-          <a href="#new" class="swiper-slide box">
-            <div class="image">
-              <img src="./img/book-3.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>New Books</h3>
-              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-            </div>
-          </a>
-
-          <a href="#new" class="swiper-slide box">
-            <div class="image">
-              <img src="./img/book-4.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>New Books</h3>
-              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-            </div>
-          </a>
-
-          <a href="#new" class="swiper-slide box">
-            <div class="image">
-              <img src="./img/book-5.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>New Books</h3>
-              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-            </div>
-          </a>
         </div>
       </div>
       <!-- New Books Section 1 End -->
@@ -258,90 +199,30 @@
       <!-- New Books Section 2 Start  -->
       <div class="swiper new-slider-2">
         <div class="swiper-wrapper">
-          <a href="#new" class="swiper-slide box">
-            <div class="image">
-              <img src="./img/book-6.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>New Books</h3>
-              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
+          {% for book in nev_books %}
+            {% if not book.id|divisibleby:2 %}
+            <a href="{% url 'book_detail' book.id %}" class="swiper-slide box">
+              <div class="image">
+                {% if book.image %}
+                  <img src="{{ book.image.url }}" alt="Book Image" />
+                {% else %}
+                  <img src="path_to_default_image.jpg" alt="Default Image" />
+                {% endif %}
               </div>
-            </div>
-          </a>
-
-          <a href="#new" class="swiper-slide box">
-            <div class="image">
-              <img src="./img/book-7.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>New Books</h3>
-              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
+              <div class="content">
+                <h3>New Books</h3>
+                <div class="price">{{ book.likes_count|default:"0" }}</div>
+                <div class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
               </div>
-            </div>
-          </a>
-
-          <a href="#new" class="swiper-slide box">
-            <div class="image">
-              <img src="./img/book-8.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>New Books</h3>
-              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-            </div>
-          </a>
-
-          <a href="#new" class="swiper-slide box">
-            <div class="image">
-              <img src="./img/book-9.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>New Books</h3>
-              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-            </div>
-          </a>
-
-          <a href="#new" class="swiper-slide box">
-            <div class="image">
-              <img src="./img/book-10.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>New Books</h3>
-              <div class="price">Rp 75.000 <span>Rp. 90.000</span></div>
-              <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-              </div>
-            </div>
-          </a>
+            </a>
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
       <!-- New Books Section 2 End-->

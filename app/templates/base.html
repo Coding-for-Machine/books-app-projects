@@ -47,8 +47,8 @@
     <header class="header">
       <!-- 1-sarlavha qismi boshlanishi -->
       <div class="header-1">
-        <a href="#" class="logo"><i class="fas fa-book"></i> Bookpolis</a>
-        <form action="" class="search-form">
+        <a href="/" class="logo"><i class="fas fa-book"></i> Bookpolis</a>
+        {% comment %} <form action="" class="search-form">
           <input
             type="search"
             name=""
@@ -56,12 +56,16 @@
             id="search-box"
           />
           <label for="search-box" type="submit" class="fas fa-search"></label>
-        </form>
+        </form> {% endcomment %}
         <div class="icons">
           <div id="search-btn" class="fas fa-search"></div>
           <a href="#" class="fas fa-heart-circle-check"></a>
           <a href="#" class="fas fa-shopping-cart"></a>
-          <a id="login-btn" class="fa-solid fa-user" href="./login.html"></a>
+          {% if request.user.is_authenticated %}
+            <a id="login-btn" class="fa-solid fa-user" href="./login.html"></a>
+          {% else %}
+            Login
+          {% endif %}
         </div>
       </div>
       <!-- 1-sarlavha qismi tugashi -->
@@ -91,19 +95,7 @@
     <div class="left box">
       <h2>Biz haqimizda</h2>
       <div class="content">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores,
-          corporis nostrum? Quam fugiat provident veniam totam rerum eaque
-          culpa molestiae ullam eveniet natus incidunt, beatae deleniti
-          blanditiis, tempore commodi dolores, tempore commodi dolores.
-        </p>
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas
-          reprehenderit ipsam quas, quasi odio totam vel fuga! Illo sunt
-          harum porro excepturi quis culpa atque, soluta est modi omnis
-          repellendus.
-        </p>
+        {{biz.body}}
         <div class="social">
           <a href="#footer"><span class="fab fa-facebook-f"></span></a>
           <a href="#footer"><span class="fab fa-twitter"></span></a>
@@ -117,15 +109,15 @@
       <div class="content">
         <div class="place">
           <span class="fas fa-map-marker-alt"></span>
-          <span class="text">Indoneziya, Yer sayyorasi</span>
+          <span class="text">{{manzil.joylashov}}</span>
         </div>
         <div class="phone">
           <span class="fas fa-phone-alt"></span>
-          <span class="text">+6282-1234-5679</span>
+          <span class="text">{{manzil.tel_number}}</span>
         </div>
         <div class="email">
           <span class="fas fa-envelope"></span>
-          <span class="text">BookpolisTes@gmail.com</span>
+          <span class="text">{{manzil.email}}</span>
         </div>
       </div>
     </div>

@@ -1,175 +1,142 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-<div class="body-wrapper"></div>
+<style>
+  /* LIKE tugmasi */
+  #like-button {
+      font-size: 20px;
+      padding: 10px 20px;
+      border: none;
+      background: #ff4d4d;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+  }
 
-    <!-- Overlay image Modal -->
-    <div class="overlay-container">
-      <div class="item-overlay">
-        <button class="item-overlay__btn">
-          <img
-            src="images/icon-close.svg"
-            alt="close image"
-            class="item-overlay__btn-img"
-          />
-        </button>
-        <div class="item-overlay__mainImg">
-          <img
-            src="images/image-product-1.jpg"
-            alt=""
-            class="item-overlay__img"
-          />
-          <button class="item-overlay__btnlft overlay-btn">
-              <img
-              src="{% static 'images/icon-next.svg' %}"
-              alt="next symbol image"
-              class="item-overlay__btnlft-img overlay-btn__img"
-            />
-          </button>
-          <button class="item-overlay__btnrgt overlay-btn">
-            <img
-              src="{% static 'images/icon-next.svg' %}"
-              alt="next symbol image"
-              class="item-overlay__btnrgt-img overlay-btn__img"
-            />
-          </button>
-        </div>
-        <div class="overlay-img__btns">
-          <button class="overlay-img__btn" data-img="0">
-            <img
-              src="{% static "images/image-product-1-thumbnail.jpg" %}"
-              alt="shoe product image"
-              class="overlay-img__btn-img"
-            />
-          </button>
-          <button class="overlay-img__btn" data-img="1">
-            <img
-              src="{% static "images/image-product-2-thumbnail.jpg" %}"
-              alt="shoe product image"
-              class="overlay-img__btn-img"
-            />
-          </button>
-          <button class="overlay-img__btn" data-img="2">
-            <img
-              src="{% static "images/image-product-3-thumbnail.jpg" %}"
-              alt="shoe product image"
-              class="overlay-img__btn-img"
-            />
-          </button>
-          <button class="overlay-img__btn" data-img="3">
-            <img
-              src="{% static "images/image-product-4-thumbnail.jpg" %}"
-              alt="shoe product image"
-              class="overlay-img__btn-img"
-            />
+  #like-button:hover {
+      background: #cc0000;
+  }
+
+  /* Emoji animatsiyasi */
+  .like-animation {
+      position: absolute;
+      pointer-events: none;
+      will-change: transform, opacity;
+  }
+</style>
+
+<!-- Kitob sahifasi -->
+<main class="item">
+  <section class="img">
+    <img src="{{ book.image.url }}" alt="{{ book.title }}" class="img-main" />
+    <div class="price-btnbox">
+      <div class="price-btns">
+        <div style="display: flex; align-items: center;">
+          <span style="margin: 5px; padding: 2px; font-size: 20px;" id="like-count">{{ book.likes_count }}</span>
+          <button style="margin: 5px; padding: 2px;" id="like-button" onclick="toggleLike(event, {{ book.id }})">
+           <h1 id="liekes"> {% if is_liked %}❤️{% else %}🤍{% endif %}<h1>
           </button>
         </div>
       </div>
+      <button class="price-cart__btn btn--orange">
+        <a style="margin:-2px; color: #fff;" href="{% url 'download_book' book.id %}" download>📥 Yuklab olish</a>
+      </button>
     </div>
+  </section>
 
-    <!-- Cart -->
-    <div class="head-cart">
-      <h3 class="head-cart__heading">Cart</h3>
-      <div class="head-cart__txt">Your cart is empty.</div>
-      <div class="head-cart__item">
-        <div class="head-cart__item-wrapper">
-            <img
-            src="{% static "images/image-product-1-thumbnail.jpg" %}"
-            alt="cart product image"
-            class="head-cart__item-img"
-          />
-          <div class="head-cart__des">
-            <p class="head-cart__des-txt">Fall Limited Edition Sneakers</p>
-            <div class="head-cart__price">
-              <span class="head-cart__price-single">$125.00*3</span>
-              <span class="head-cart__price-total">$375.00</span>
-            </div>
-          </div>
-          <button class="head-cart__item-btn">
-            <img
-            src="{% static "images/icon-delete.svg" %}"
-              alt="delete image"
-              class="head-cart__btn-img"
-            />
-          </button>
-        </div>
-        
-        <button class="head-cart__btn btn--orange">Checkout</button>
-    </div>
-    </div>
-
+  <section class="price">
+    <h1 class="price-main__heading">{{ book.title }}</h1>
+    <p class="price-txt">{{ book.body|safe }}</p>
     
-    
-    <!-- Main item container -->
-    <main class="item">
-      <section class="img">
-        <img src="{{ book.image.url }}" alt="{{ book.title }}"
-         class="img-main" />
-        
-      </section>
-
-      <section class="price">
-        <h2 class="price-sub__heading">Sneaker Company</h2>
-        <h1 class="price-main__heading">{{ book.title }}</h1>
-        <p class="price-txt">
-            {{ book.body|safe }}
-        </p>
-
-{% comment %} <p><strong>Likes:</strong> <span id="like-count">{{ book.likes_count }}</span></p> {% endcomment %}
-
-        <div class="price-box">
-          <div class="price-box__main">
-            <span class="price-box__main-new">$125.00</span>
-            <span class="price-box__main-discount"> 50%</span>
-          </div>
-          <span class="price-box__old">$250.00</span>
-        </div>
-
-        <div class="price-btnbox">
-          <div class="price-btns">
-            <div style="display: flex; ">
-                <span style="margin: 5px; font-size: 18px;" id="like-count">{{ book.likes_count }}</span>
-                <button style="margin: 5px" id="like-button" onclick="toggleLike({{ book.id }})">
-                    {% if is_liked %}❤️ Unlike{% else %}🤍 Like{% endif %}
-                </button>
-            </div>
-          </div>
-          <button class="price-cart__btn btn--orange">
-            <a href="{% url 'download_book' book.id %}" download>📥 Yuklab olish</a>
-          </button>
-        </div>
-      </section>
-    </main>
-
-    <!-- Attribution -->
-    <div class="attribution">
-      Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-        >Frontend Mentor</a
-      >. Coded by <a href="#">venkatesh.b</a>.
-    </div>
+  </section>
+</main>
 
 {% csrf_token %}
 <script>
-        function getCSRFToken() {
-            return document.querySelector('[name=csrfmiddlewaretoken]').value;
-        }
-    
-        function toggleLike(bookId) {
-            fetch(`/${bookId}/like/`, {
-                method: "POST",
-                headers: {
-                    "X-CSRFToken": getCSRFToken(),
-                    "Content-Type": "application/json",
-                },
-                credentials: "same-origin",
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("like-count").innerText = data.likes_count;
-                document.getElementById("like-button").innerText = data.liked ? "❤️ Unlike" : "🤍 Like";
-            })
-            .catch(error => console.error("Xatolik:", error));
-        }
+  // CSRF token olish
+  function getCSRFToken() {
+      let cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          let cookie = cookies[i].trim();
+          if (cookie.startsWith("csrftoken=")) {
+              return cookie.substring("csrftoken=".length, cookie.length);
+          }
+      }
+      return "";
+  }
+
+// Emoji animatsiyasi faqat tugmaning aniq joyidan chiqishi uchun
+function createButtonCenteredEmojiAnimation(buttonElement) {
+  let emojis = ["✨", "🌟", "💫", "⭐", "🔥", "💖", "💥", "🎆", "🎇", "🧨", "❤️", "💎"];
+  let emojiCount = 100; // Emoji soni
+
+  // Tugmaning aniq ekrandagi koordinatalarini olish
+  let buttonRect = buttonElement.getBoundingClientRect();
+  let x = buttonRect.left + window.scrollX + buttonRect.width / 2;
+  let y = buttonRect.top + window.scrollY + buttonRect.height / 2;
+
+  for (let i = 0; i < emojiCount; i++) {
+      let star = document.createElement("div");
+      star.classList.add("like-animation");
+      star.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+
+      let randomAngle = Math.random() * 2 * Math.PI; // 0 - 360 gradus
+      let randomDistance = Math.random() * 1000 + 500; // 20px - 70px radiusda harakat
+      let finalX = x + Math.cos(randomAngle) * randomDistance;
+      let finalY = y + Math.sin(randomAngle) * randomDistance;
+      let randomSize = Math.random() * 20 + 10; // Emoji o‘lchami 10px - 30px
+      let randomDuration = Math.random() * 20 + 10; // Emoji yo‘qolish vaqti 1-3s
+
+      star.style.position = "absolute";
+      star.style.left = `${x}px`;
+      star.style.top = `${y}px`;
+      star.style.fontSize = `${randomSize}px`;
+      star.style.opacity = "1";
+      star.style.transition = `opacity ${randomDuration}s ease-out, transform ${randomDuration}s ease-out`;
+
+      document.body.appendChild(star);
+
+      setTimeout(() => {
+          star.style.opacity = "0";
+          star.style.transform = `translate(${finalX - x}px, ${finalY - y}px) scale(1.2)`;
+          setTimeout(() => star.remove(), randomDuration * 1000);
+      }, 100);
+  }
+}
+
+// Like tugmachasini bosganda
+function toggleLike(event, bookId) {
+  let likeButton = document.getElementById("liekes");
+
+  fetch(`/${bookId}/like/`, {
+      method: "POST",
+      headers: {
+          "X-CSRFToken": getCSRFToken(),
+          "Content-Type": "application/json",
+      },
+      credentials: "same-origin",
+  })
+  .then(response => response.json())
+  .then(data => {
+      let likeCount = document.getElementById("like-count");
+
+      likeCount.innerText = data.likes_count;
+      likeButton.innerText = data.liked ? "❤️" : "🤍";
+      likeButton.classList.add("liked");
+
+      if (data.liked) {
+          createButtonCenteredEmojiAnimation(likeButton); // **Tugmaning markazidan emoji chiqariladi**
+      }
+
+      setTimeout(() => {
+          likeButton.classList.remove("liked");
+      }, 1000);
+  })
+  .catch(error => console.error("Xatolik:", error));
+}
+
+
+
 </script>
 {% endblock %}
